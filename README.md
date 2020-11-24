@@ -5,7 +5,7 @@ https://github.com/chamatheapp/chama-backend-assignment-course-signup
 --> Calculus as age, critical processes as signup and statistics, other processes as cruds
 
 # To be improved 
---> segreggate rules and apply Clean Code and KISS on repos and services may help keed controllers ruleless
+--> segreggate rules and apply Clean Code and KISS on repos and services may help keep controllers ruleless
 
 # Extra (swagger | health)
 --> I am used to add swagger and health to easy start tests, but after implementing good integration they may not be needed for testing purpouses

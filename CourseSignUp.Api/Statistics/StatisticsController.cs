@@ -1,6 +1,5 @@
 ﻿using CourseSignUp.Repository;
 using Microsoft.AspNetCore.Mvc;
-using System;
 using System.Linq;
 using System.Threading.Tasks;
 

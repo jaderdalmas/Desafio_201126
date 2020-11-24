@@ -32,7 +32,7 @@ namespace CourseSignUp.Service
       {
         _ = await _emailService.SendSignUpEmail(email, result).ConfigureAwait(false);
       }
-      catch(Exception ex)
+      catch (Exception ex)
       {
         _logger.LogError(ex, "Couldn't send SingUp Email");
       }

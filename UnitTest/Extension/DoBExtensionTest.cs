@@ -45,7 +45,7 @@ namespace UnitTest.Extension
       var result = date.GetAge();
 
       // Assert
-      Assert.Equal(age-1, result);
+      Assert.Equal(age - 1, result);
     }
   }
 }

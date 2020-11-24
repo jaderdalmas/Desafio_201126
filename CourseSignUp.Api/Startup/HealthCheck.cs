@@ -11,49 +11,49 @@ using System.Text.Json;
 
 namespace Api.StartUp
 {
+  /// <summary>
+  /// Health Check
+  /// </summary>
+  public static class HealthCheck
+  {
     /// <summary>
-    /// Health Check
+    /// Url
     /// </summary>
-    public static class HealthCheck
+    public const string URL = "/health";
+
+    /// <summary>
+    /// Register
+    /// </summary>
+    /// <param name="services">Services</param>
+    public static void AddHealthCheck(this IServiceCollection services)
     {
-        /// <summary>
-        /// Url
-        /// </summary>
-        public const string URL = "/health";
-
-        /// <summary>
-        /// Register
-        /// </summary>
-        /// <param name="services">Services</param>
-        public static void AddHealthCheck(this IServiceCollection services)
-        {
-            services.AddHealthChecks();
-        }
-
-        /// <summary>
-        /// Configuration
-        /// </summary>
-        /// <param name="app">Application</param>
-        public static void ConfigureHealthCheck(this IApplicationBuilder app)
-        {
-            app.UseHealthChecks(URL, new HealthCheckOptions()
-            {
-                ResponseWriter = async (context, report) =>
-                {
-                    var result = JsonSerializer.Serialize(new
-                    {
-                        statusApplication = report.Status.ToString(),
-                        healthChecks = report.Entries.Select(e => new
-                        {
-                            check = e.Key,
-                            status = Enum.GetName(typeof(HealthStatus), e.Value.Status),
-                            description = (e.Value.Status != HealthStatus.Healthy) ? e.Value.Description : string.Empty
-                        })
-                    }, new JsonSerializerOptions() { Encoder = JavaScriptEncoder.UnsafeRelaxedJsonEscaping, WriteIndented = true });
-                    context.Response.ContentType = MediaTypeNames.Application.Json;
-                    await context.Response.WriteAsync(result).ConfigureAwait(false);
-                }
-            });
-        }
+      services.AddHealthChecks();
     }
+
+    /// <summary>
+    /// Configuration
+    /// </summary>
+    /// <param name="app">Application</param>
+    public static void ConfigureHealthCheck(this IApplicationBuilder app)
+    {
+      app.UseHealthChecks(URL, new HealthCheckOptions()
+      {
+        ResponseWriter = async (context, report) =>
+        {
+          var result = JsonSerializer.Serialize(new
+          {
+            statusApplication = report.Status.ToString(),
+            healthChecks = report.Entries.Select(e => new
+            {
+              check = e.Key,
+              status = Enum.GetName(typeof(HealthStatus), e.Value.Status),
+              description = (e.Value.Status != HealthStatus.Healthy) ? e.Value.Description : string.Empty
+            })
+          }, new JsonSerializerOptions() { Encoder = JavaScriptEncoder.UnsafeRelaxedJsonEscaping, WriteIndented = true });
+          context.Response.ContentType = MediaTypeNames.Application.Json;
+          await context.Response.WriteAsync(result).ConfigureAwait(false);
+        }
+      });
+    }
+  }
 }

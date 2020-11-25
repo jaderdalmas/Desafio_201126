@@ -13,7 +13,7 @@ namespace IntegrationTest.Lecturers
   public class LecturersControllerTest : IClassFixture<TestApplicationFactory<Startup>>
   {
     private readonly TestApplicationFactory<Startup> _factory;
-    private string PostUrl => "Lecturers/create";
+    public static string PostUrl => "Lecturers/create";
 
     public LecturersControllerTest(TestApplicationFactory<Startup> factory)
     {

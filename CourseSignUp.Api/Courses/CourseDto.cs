@@ -1,4 +1,5 @@
 ﻿using CourseSignUp.Model;
+using System.Text.Json.Serialization;
 
 namespace CourseSignUp.Api.Courses
 {
@@ -13,8 +14,13 @@ namespace CourseSignUp.Api.Courses
       NumberOfStudents = course.NumberOfStudents;
     }
 
+    [JsonPropertyName("id")]
     public string Id { get; set; }
+
+    [JsonPropertyName("capacity")]
     public int Capacity { get; set; }
+
+    [JsonPropertyName("numberOfStudents")]
     public int NumberOfStudents { get; set; }
   }
 }

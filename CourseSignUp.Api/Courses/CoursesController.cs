@@ -40,6 +40,9 @@ namespace CourseSignUp.Api.Courses
     [HttpPost, Route("sign-up")]
     public async Task<IActionResult> Post([FromBody] SignUpToCourseDto signUpToCourseDto)
     {
+      if (signUpToCourseDto?.Student is null)
+        return NoContent();
+
       var result = await service.SignUp(signUpToCourseDto.CourseId, signUpToCourseDto.Student.Email, signUpToCourseDto.Student.Name, signUpToCourseDto.Student.DateOfBirth).ConfigureAwait(false);
 
       if (string.IsNullOrWhiteSpace(result))

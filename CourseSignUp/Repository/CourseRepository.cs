@@ -18,7 +18,8 @@ namespace CourseSignUp.Repository
 
     public Task<string> Add(Course course)
     {
-      if (course.Capacity < course.NumberOfStudents)
+      if (course.Capacity < course.NumberOfStudents
+        || string.IsNullOrWhiteSpace(course.Name))
         return Task.FromResult(string.Empty);
 
       db.Add(course);

@@ -12,6 +12,6 @@ namespace CourseSignUp.Repository
 
     Task<string> Add(Student student);
 
-    Task<IList<StudentStatistic>> GetStatistic();
+    Task<IList<CourseStatistic>> GetStatistic();
   }
 }

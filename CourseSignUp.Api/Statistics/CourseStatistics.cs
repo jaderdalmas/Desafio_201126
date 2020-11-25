@@ -1,4 +1,5 @@
 ﻿using CourseSignUp.Model;
+using System.Linq;
 using System.Text.Json.Serialization;
 
 namespace CourseSignUp.Api.Statistics
@@ -7,9 +8,10 @@ namespace CourseSignUp.Api.Statistics
   {
     public CourseStatistics() { }
 
-    public CourseStatistics(StudentStatistic statistic)
+    public CourseStatistics(CourseStatistic statistic)
     {
       Id = statistic.CourseId;
+      Name = statistic.CourseName;
       MinimumAge = statistic.Min;
       MaximumAge = statistic.Max;
       AverageAge = statistic.Avg;

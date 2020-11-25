@@ -1,4 +1,5 @@
-﻿using CourseSignUp.Repository;
+﻿using CourseSignUp.Extension;
+using CourseSignUp.Repository;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Threading.Tasks;
@@ -10,15 +11,17 @@ namespace CourseSignUp.Service
     readonly ILogger _logger;
 
     readonly IEmailService _emailService;
+    readonly IStatisticsService _statisticsService;
 
     readonly ICourseRepository _courseRepository;
     readonly IStudentRepository _studentRepository;
 
-    public SignUpService(ILogger<SignUpService> logger, IEmailService emailService, ICourseRepository courseRepository, IStudentRepository studentRepository)
+    public SignUpService(ILogger<SignUpService> logger, IEmailService emailService, IStatisticsService statisticsService, ICourseRepository courseRepository, IStudentRepository studentRepository)
     {
       _logger = logger;
 
       _emailService = emailService;
+      _statisticsService = statisticsService;
 
       _courseRepository = courseRepository;
       _studentRepository = studentRepository;
@@ -39,6 +42,7 @@ namespace CourseSignUp.Service
 
       if (!result) return string.Empty;
 
+      _ = await _statisticsService.Add(courseId, doB.GetAge()).ConfigureAwait(false);
       return await _studentRepository.Add(courseId, email, name, doB).ConfigureAwait(false);
     }
   }

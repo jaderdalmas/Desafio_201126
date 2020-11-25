@@ -8,6 +8,7 @@ namespace CourseSignUp.Repository
     {
       services.AddSingleton<ICourseRepository, CourseRepository>();
       services.AddSingleton<ILectureRepository, LectureRepository>();
+      services.AddSingleton<IStatisticRepository, StatisticRepository>();
       services.AddSingleton<IStudentRepository, StudentRepository>();
 
       return services;

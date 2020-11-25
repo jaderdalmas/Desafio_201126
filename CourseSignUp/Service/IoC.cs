@@ -8,6 +8,7 @@ namespace CourseSignUp.Service
     {
       services.AddSingleton<IEmailService, MockEmailService>();
       services.AddSingleton<ISignUpService, SignUpService>();
+      services.AddSingleton<IStatisticsService, StatisticsService>();
 
       return services;
     }

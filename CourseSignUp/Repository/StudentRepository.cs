@@ -27,11 +27,11 @@ namespace CourseSignUp.Repository
       return Task.FromResult(student.Id);
     }
 
-    public Task<IList<StudentStatistic>> GetStatistic()
+    public Task<IList<CourseStatistic>> GetStatistic()
     {
       var groups = db.GroupBy(x => x.CourseId);
 
-      IList<StudentStatistic> list = new List<StudentStatistic>();
+      IList<CourseStatistic> list = new List<CourseStatistic>();
       foreach (var group in groups)
       {
         var result = group.Select(x => x.DateOfBirth.GetAge());
@@ -40,7 +40,7 @@ namespace CourseSignUp.Repository
         var min = result.Min();
         var max = result.Max();
 
-        list.Add(new StudentStatistic(group.Key, (decimal)avg, min, max));
+        list.Add(new CourseStatistic(group.Key, (decimal)avg, min, max));
       }
 
       return Task.FromResult(list);

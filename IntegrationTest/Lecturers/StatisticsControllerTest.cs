@@ -5,6 +5,7 @@ using CourseSignUp.Api.Lecturers;
 using CourseSignUp.Api.Statistics;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Net;
 using System.Text.Json;
 using System.Threading.Tasks;
@@ -24,25 +25,6 @@ namespace IntegrationTest.Lecturers
     }
 
     [Fact]
-    public async Task Get_Empty()
-    {
-      // Arrange
-      var client = _factory.CreateClient();
-
-      // Act
-      var response = await client.GetAsync(GetUrl);
-
-      // Assert
-      Assert.Equal(HttpStatusCode.OK, response.StatusCode);
-
-      var result = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
-      Assert.NotEmpty(result);
-
-      var item = JsonSerializer.Deserialize<IEnumerable<CourseStatistics>>(result);
-      Assert.Empty(item);
-    }
-
-    [Fact]
     public async Task Get()
     {
       // Arrange
@@ -50,7 +32,7 @@ namespace IntegrationTest.Lecturers
 
       var lecture = new CreateLecturerDto()
       {
-        Name = "Teste"
+        Name = "Lecture"
       };
       var lectureResponse = await client.PostAsync(LecturersControllerTest.PostUrl, lecture.AsContent());
       var lectureId = await lectureResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
@@ -58,7 +40,7 @@ namespace IntegrationTest.Lecturers
       var course = new CreateCourseDto()
       {
         LecturerId = lectureId,
-        Name = "Teste",
+        Name = "Course",
         Capacity = 10
       };
       var courseResponse = await client.PostAsync(CoursesControllerTest.PostUrl, course.AsContent());
@@ -69,7 +51,7 @@ namespace IntegrationTest.Lecturers
         CourseId = courseId,
         Student = new StudentDto()
         {
-          Name = "Teste",
+          Name = "Student",
           Email = "teste@test.com",
           DateOfBirth = DateTime.Now.AddYears(-28)
         }
@@ -87,6 +69,8 @@ namespace IntegrationTest.Lecturers
 
       var item = JsonSerializer.Deserialize<IEnumerable<CourseStatistics>>(result);
       Assert.NotEmpty(item);
+      Assert.Equal(course.Name, item.First().Name);
+      Assert.Equal(item.First().MaximumAge, item.First().MinimumAge);
     }
   }
 }

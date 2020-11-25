@@ -74,8 +74,7 @@ namespace IntegrationTest.Lecturers
           DateOfBirth = DateTime.Now.AddYears(-28)
         }
       };
-      var studentResponse = await client.PostAsync(CoursesControllerTest.SignUpUrl, signUp.AsContent());
-      var studentId = await studentResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+      _ = await client.PostAsync(CoursesControllerTest.SignUpUrl, signUp.AsContent());
 
       // Act
       var response = await client.GetAsync(GetUrl);

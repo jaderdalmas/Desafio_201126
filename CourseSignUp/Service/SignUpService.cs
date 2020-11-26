@@ -1,4 +1,5 @@
 ﻿using CourseSignUp.Extension;
+using CourseSignUp.Handler;
 using CourseSignUp.Repository;
 using Microsoft.Extensions.Logging;
 using System;
@@ -25,6 +26,18 @@ namespace CourseSignUp.Service
 
       _courseRepository = courseRepository;
       _studentRepository = studentRepository;
+
+      EventBus.Instance.Register(this);
+    }
+
+    public void Dispose()
+    {
+      EventBus.Instance.Unregister(this);
+    }
+
+    public Task<string> OnEvent(SignUpEvent signUp)
+    {
+      return SignUp(signUp.CourseId, signUp.Email, signUp.Name, signUp.DateOfBirth);
     }
 
     public async Task<string> SignUp(string courseId, string email, string name, DateTime doB)

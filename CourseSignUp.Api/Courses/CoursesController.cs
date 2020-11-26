@@ -1,6 +1,8 @@
-﻿using CourseSignUp.Repository;
+﻿using CourseSignUp.Handler;
+using CourseSignUp.Repository;
 using CourseSignUp.Service;
 using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Threading.Tasks;
 
 namespace CourseSignUp.Api.Courses
@@ -43,12 +45,9 @@ namespace CourseSignUp.Api.Courses
       if (signUpToCourseDto?.Student is null)
         return NoContent();
 
-      var result = await service.SignUp(signUpToCourseDto.CourseId, signUpToCourseDto.Student.Email, signUpToCourseDto.Student.Name, signUpToCourseDto.Student.DateOfBirth).ConfigureAwait(false);
+      EventBus.Instance.PostEvent(service.OnEvent(signUpToCourseDto.GetEvent()));
 
-      if (string.IsNullOrWhiteSpace(result))
-        return NoContent();
-
-      return Ok(result);
+      return Ok(Guid.NewGuid().ToString());
     }
   }
 }

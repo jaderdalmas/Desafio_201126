@@ -19,6 +19,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\CourseSignUp.Handler\CourseSignUp.Handler.csproj" />
     <ProjectReference Include="..\CourseSignUp\CourseSignUp.csproj" />
   </ItemGroup>
 

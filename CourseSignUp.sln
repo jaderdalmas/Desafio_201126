@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTest", "UnitTest\UnitTe
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IntegrationTest", "IntegrationTest\IntegrationTest.csproj", "{671696A9-770B-475B-9D36-694404F77A15}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CourseSignUp.Handler", "CourseSignUp.Handler\CourseSignUp.Handler.csproj", "{1B76D8D4-20DC-4647-A0D2-9DBD34A6230D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{671696A9-770B-475B-9D36-694404F77A15}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{671696A9-770B-475B-9D36-694404F77A15}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{671696A9-770B-475B-9D36-694404F77A15}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1B76D8D4-20DC-4647-A0D2-9DBD34A6230D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1B76D8D4-20DC-4647-A0D2-9DBD34A6230D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1B76D8D4-20DC-4647-A0D2-9DBD34A6230D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1B76D8D4-20DC-4647-A0D2-9DBD34A6230D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

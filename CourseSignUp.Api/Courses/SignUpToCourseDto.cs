@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CourseSignUp.Handler;
+using System;
 
 namespace CourseSignUp.Api.Courses
 {
@@ -12,6 +13,16 @@ namespace CourseSignUp.Api.Courses
       public string Email { get; set; }
       public string Name { get; set; }
       public DateTime DateOfBirth { get; set; }
+    }
+
+    public SignUpEvent GetEvent()
+    {
+      return new SignUpEvent() { 
+        CourseId = CourseId,
+        Email = Student.Email,
+        Name = Student.Name,
+        DateOfBirth = Student.DateOfBirth,
+      };
     }
   }
 }
